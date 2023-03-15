@@ -1,0 +1,115 @@
+/* poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', 'sans-serif';
+}
+
+a,
+a:visited,
+a:active,
+a:focus {
+  text-decoration: none;
+}
+
+:root {
+  /* colors */
+  --body-color: #e4e9f7;
+  --sidebar-color: #fff;
+  --primary-color: #695cfe;
+  --primary-color-light: #f6f5ff;
+  --toggle-color: #ddd;
+  --text-color: #707070;
+  --primary: #2f9721;
+  --secondary: #008fff;
+  --warning: #ff794f;
+
+  /* transitions */
+  --tran-03: all 0.2s ease;
+  --tran-04: all 0.3s ease;
+  --tran-05: all 0.4s ease;
+  --tran-06: all 0.5s ease;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #939393;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffca2c;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #f6c124;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.icon-view:hover {
+  color: var(--primary);
+}
+
+.icon-edit:hover {
+  color: var(--secondary);
+}
+
+.icon-delete:hover {
+  color: var(--warning);
+}
+
+.bg-custom1 {
+  background: rgb(112, 140, 157);
+  background: linear-gradient(
+    140deg,
+    rgba(112, 140, 157, 1) 0%,
+    rgba(255, 255, 255, 1) 62%,
+    rgba(207, 226, 230, 1) 100%
+  );
+}
+
+.bg-custom2 {
+  background: rgb(77, 76, 74);
+  background: linear-gradient(
+    84deg,
+    rgba(77, 76, 74, 1) 0%,
+    rgba(161, 157, 144, 1) 100%
+  );
+  color: white; /* font color */
+}
+
+#rowPatient:hover {
+  cursor: pointer;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+img {
+  border-radius: 100%;
+}
+
+.card {
+  height: 150px;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  opacity: 1;
+}
+
+.modal-dialog {
+  max-width: 50% !important;
+}

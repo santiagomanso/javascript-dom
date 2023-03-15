@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DOM project | Code Academy Berlin | Santiago Manso Castro</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/2f1a5ebe77.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row min-vh-100 flex-row">
+        <aside class="bg-dark text-light col-3 col-md-4 col-lg-3">
+          <div
+            class="navbar navbar-expand-lg navbar-dark navbar-dark flex-row flex-md-column bd-dark align-items-center py-2 text-center"
+            id="sidebar"
+          >
+            <div class="d-flex align-items-center">
+              <img
+                src="https://randomuser.me/api/portraits/women/35.jpg"
+                alt="Jackie Foster"
+                class="rounded-circle"
+                width="80"
+                height="80"
+              />
+              <div
+                class="d-flex flex-column align-items-start justify-content-between ms-4 my-5"
+              >
+                <span class="fs-4">
+                  <span class="fw-light">Dr. Jackie</span>
+                  <span class="fw-bolder">Foster</span>
+                </span>
+                <span class="fw-light fs-4">
+                  <i class="fa-solid fa-address-card pe-3"></i>
+                  <i class="fa-regular fa-envelope pe-3"></i>
+                  <i class="fa-solid fa-gear pe-3"></i>
+                  <i class="fa-solid fa-power-off"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <nav>
+            <!-- <ul class="" style="list-style: none">
+              <li class="my-4">
+                <a
+                  class="text-light fs-4"
+                  style="text-decoration: none"
+                  href="/"
+                >
+                  Home
+                </a>
+              </li>
+              <li class="my-4">
+                <a
+                  class="text-light fs-4"
+                  style="text-decoration: none"
+                  href="/"
+                >
+                  Appointments
+                </a>
+              </li>
+            </ul> -->
+          </nav>
+        </aside>
+        <main class="col-9 col-md-8 col-lg-9 p-lg-3 py-lg-5 bg-secondary">
+          <div class="row">
+            <div class="col-6">
+              <h1 class="">
+                Patients
+                <i class="fa-solid fa-hospital-user fs-2"></i>
+              </h1>
+            </div>
+            <div class="col-6 text-start">
+              <button
+                class="btn btn-warning animate__animated animate__fadeInLeft"
+                data-bs-toggle="modal"
+                data-bs-target="#modalNewPatient"
+              >
+                <i class="fa-solid fa-plus"></i>
+                New Patient
+              </button>
+            </div>
+            <div class="row d-flex align-items-baseline">
+              <div class="col-2">
+                <select class="form-select" id="selectRoom" disabled>
+                  <option value="all">All Rooms</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <div class="d-flex justify-content-center">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="gender"
+                      id="filterCheckMale"
+                      value="male"
+                      disabled
+                    />
+                    <label
+                      class="form-check-label"
+                      id="labelMale"
+                      for="filterCheckMale"
+                    >
+                      Male</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="gender"
+                      id="filterCheckFemale"
+                      value="female"
+                      disabled
+                    />
+                    <label
+                      class="form-check-label"
+                      id="labelFemale"
+                      for="filterCheckFemale"
+                      >Female</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="gender"
+                      id="filterCheckDiverse"
+                      value="diverse"
+                      disabled
+                    />
+                    <label
+                      class="form-check-label"
+                      id="labelDiverse"
+                      for="filterCheckDiverse"
+                    >
+                      Diverse
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="gender"
+                      id="filterCheckAll"
+                      value="all"
+                      checked
+                      disabled
+                    />
+                    <label
+                      class="form-check-label"
+                      id="labelMale"
+                      for="filterCheckAll"
+                    >
+                      all</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </span>
+                  <input
+                    type="text"
+                    id="searchPatient"
+                    class="form-control"
+                    placeholder="Enter last name"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="main"></div>
+        </main>
+      </div>
+    </div>
+    <!-- Modal NEW patient -->
+    <div
+      class="modal fade"
+      id="modalNewPatient"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" id="newPatient">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">New Patient</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button
+                  class="nav-link active"
+                  id="nav-general-info-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-general-info"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-general-info"
+                  aria-selected="true"
+                >
+                  1 - General Info
+                </button>
+                <button
+                  class="nav-link"
+                  id="nav-contact-info-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-contact-info"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-contact-info"
+                  aria-selected="false"
+                >
+                  2 - Contact information
+                </button>
+                <button
+                  class="nav-link"
+                  id="nav-icu-info-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-icu-info"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-icu-info"
+                  aria-selected="false"
+                >
+                  3 - Intensive Care Unit
+                </button>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div
+                class="tab-pane fade show active p-3"
+                id="nav-general-info"
+                role="tabpanel"
+                aria-labelledby="nav-general-info-tab"
+              >
+                <div class="row">
+                  <!-- left column -->
+                  <div class="col-md-5 d-flex flex-column align-items-center">
+                    <h5>Patient Information</h5>
+                    <p class="text-muted">
+                      Type the information of the patient according to the
+                      inputs on the right side of this window, first three
+                      inputs fields are for basic information like name and last
+                      name
+                    </p>
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"
+                      alt="dafultUser"
+                      width="200"
+                      height="200"
+                      id="profilePicture"
+                    />
+                  </div>
+
+                  <!-- right column -->
+                  <div class="col-md-7">
+                    <label for="firstName">First Name *</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        id="firstName"
+                        class="form-control"
+                        placeholder="Enter frst name"
+                      />
+                    </div>
+                    <label for="lastName">Last Name *</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        id="lastName"
+                        class="form-control"
+                        placeholder="Enter last name"
+                      />
+                    </div>
+                    <label for="lastName">Date of birth *</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="date"
+                        id="dob"
+                        class="form-control"
+                        placeholder="Date of birth"
+                      />
+                    </div>
+                    <div class="input-group mb-3">
+                      <div class="d-flex flex-column">
+                        <label for="gender">Gender *</label>
+                        <div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="gender"
+                              id="checkMale"
+                              value="male"
+                            />
+                            <label
+                              class="form-check-label"
+                              id="labelMale"
+                              for="checkMale"
+                            >
+                              Male</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="gender"
+                              id="checkFemale"
+                              value="option2"
+                            />
+                            <label
+                              class="form-check-label"
+                              id="labelFemale"
+                              for="inlineCheckbox1"
+                              >Female</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline mb-3">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="gender"
+                              id="checkDiverse"
+                              value="option3"
+                            />
+                            <label
+                              class="form-check-label"
+                              id="labelDiverse"
+                              for="inlineCheckbox1"
+                            >
+                              Diverse
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <label for="inputPicture">Patient's picture</label>
+                        <div class="input-group mb-3">
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            id="inputPicture"
+                            class="form-control"
+                            placeholder="a valid email is required"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="tab-pane fade p-3"
+                id="nav-contact-info"
+                role="tabpanel"
+                aria-labelledby="nav-contact-info-tab"
+              >
+                <div class="row">
+                  <!-- left column -->
+                  <div class="col-md-5">
+                    <h5>Contact Information</h5>
+                    <p class="text-muted">
+                      information relevant for future appointments, controls or
+                      to contact family or emergency contact; provide also
+                      health insurance if the patient has one and in case the
+                      patient is a minor (-18) check yes on the option under age
+                      and provide legal guardian contact information.
+                    </p>
+                  </div>
+
+                  <!-- right column -->
+                  <div class="col-md-7">
+                    <label for="phone">Phone number</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="tel"
+                        id="phone"
+                        class="form-control"
+                        placeholder="Include international code"
+                      />
+                    </div>
+                    <label for="email">Email</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        placeholder="a valid email is required"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="tab-pane fade p-3"
+                id="nav-icu-info"
+                role="tabpanel"
+                aria-labelledby="nav-icu-info-tab"
+              >
+                <div class="row">
+                  <!-- left column -->
+                  <div class="col-md-5">
+                    <h5>Intensive Care Unit</h5>
+                    <p class="text-muted">
+                      Provide relevant information for health personel, such as
+                      admition date (DD/MM/YYYY format), Room number, diagnosis,
+                      Assigned nurse, health insurance company and policy number
+                      and a profile picture so that the other employees can
+                      identify easily this patient. More info available on
+                      <a href="/guide.html">user's manual</a>
+                    </p>
+                  </div>
+
+                  <!-- right column -->
+                  <div class="col-md-7">
+                    <label for="phone">Diagnosis</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        id="diagnosis"
+                        class="form-control"
+                        placeholder="Specify full diagnosis here"
+                      />
+                    </div>
+                    <label for="admitionDate">Admition date</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="date"
+                        id="admitionDate"
+                        class="form-control"
+                        placeholder="Date when patient was admited to this ward"
+                      />
+                    </div>
+
+                    <label for="insuranceName" class="text-muted"
+                      >Health insurance company</label
+                    >
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        id="insuranceName"
+                        class="form-control"
+                        placeholder="Enter name of the company"
+                        disabled
+                      />
+                    </div>
+                    <label for="insuranceNumber" class="text-muted">
+                      Policy number
+                    </label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        id="insuranceNumber"
+                        class="form-control"
+                        placeholder="provide 10-digit number"
+                        disabled
+                      />
+                    </div>
+                    <label for="room">Room number</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="number"
+                        id="room"
+                        class="form-control"
+                        placeholder="provide 10-digit number"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-dismiss="modal"
+                id="btnCancelNewPatient"
+              >
+                Cancel
+              </button>
+              <button type="button" class="btn btn-success" id="btnNewPatient">
+                Add new patient
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal VIEW patient -->
+    <div
+      class="modal fade"
+      id="modalViewPatient"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modal-title"></h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modal-body">
+            <!-- SHOW DATA COMES HERE -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-success">Send Home</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
